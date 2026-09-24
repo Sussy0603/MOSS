@@ -1,0 +1,370 @@
+// ============================================================
+// Every label in MOSS, in English and French.
+// To add a label: add the same key to BOTH en and fr.
+// Use it in code with t('key'), or in HTML with data-t="key".
+// ============================================================
+
+const en = {
+  'login.tagline': 'Your one-person operations hub.',
+  'login.google': 'Sign in with Google',
+  'login.notOwner': 'This account is not allowed in MOSS.',
+  'offline.badge': 'Offline — view only',
+  'offline.noSave': "You're offline. Saving needs internet.",
+
+  'nav.dashboard': 'Dashboard',
+  'nav.sites': 'Apps & Websites',
+  'nav.appointments': 'Appointments',
+  'nav.todos': 'To-do',
+  'nav.notes': 'Notes',
+  'nav.roadmap': 'Roadmap',
+  'nav.accounting': 'Accounting',
+  'nav.profile': 'Profile',
+
+  'btn.add': 'Add',
+  'btn.save': 'Save',
+  'btn.cancel': 'Cancel',
+  'btn.delete': 'Delete',
+  'btn.edit': 'Edit',
+  'btn.close': 'Close',
+  'confirm.delete': 'Delete this? This cannot be undone.',
+  'saved': 'Saved',
+  'deleted': 'Deleted',
+  'error.generic': 'Something went wrong',
+  'empty': 'Nothing here yet.',
+  'none': 'None',
+  'search': 'Search…',
+  'all': 'All',
+
+  'f.title': 'Title',
+  'f.name': 'Name',
+  'f.notes': 'Notes',
+  'f.description': 'Description',
+  'f.date': 'Date',
+  'f.dueDate': 'Due date',
+  'f.client': 'Client',
+  'f.site': 'Site',
+  'f.email': 'Email',
+  'f.phone': 'Phone',
+  'f.status': 'Status',
+  'f.repeat': 'Repeat',
+  'f.priority': 'Priority',
+
+  'repeat.none': 'Does not repeat',
+  'repeat.weekly': 'Every week',
+  'repeat.monthly': 'Every month',
+  'repeat.yearly': 'Every year',
+  'priority.low': 'Low',
+  'priority.medium': 'Medium',
+  'priority.high': 'High',
+
+  // Dashboard
+  'dash.appointments': 'Coming up',
+  'dash.todos': 'Due or overdue',
+  'dash.money': 'This month',
+  'dash.renewals': 'Renewals in 30 days',
+  'dash.unpaid': 'unpaid invoices',
+  'dash.allClear': 'All clear',
+  'dash.hello': 'Hi Suzy',
+
+  // To-do
+  'todo.new': 'New task',
+  'todo.showDone': 'Show done',
+  'todo.overdue': 'Overdue',
+  'todo.nextOn': 'Done! Next one on',
+
+  // Notes
+  'notes.new': 'New note',
+  'notes.untitled': 'Untitled',
+  'notes.tags': 'Tags (comma separated)',
+  'notes.pin': 'Pin',
+  'notes.unpin': 'Unpin',
+  'notes.pick': 'Pick a note, or make a new one.',
+  'notes.back': '← Notes',
+
+  // Roadmap
+  'road.new': 'New goal',
+  'road.idea': 'Idea',
+  'road.doing': 'Doing',
+  'road.done': 'Done',
+
+  // Appointments
+  'appt.new': 'New appointment',
+  'appt.start': 'Starts',
+  'appt.end': 'Ends',
+  'appt.location': 'Location',
+  'appt.upcoming': 'Upcoming',
+  'appt.today': 'Today',
+  'appt.sync': 'Sync with Google',
+  'appt.syncing': 'Syncing…',
+  'appt.synced': 'Synced with Google Calendar',
+  'appt.syncNeedsLogin': 'Log out and back in with Google to allow Calendar access.',
+  'appt.syncNotSetUp': 'Google sync is not set up yet (see README, phase 7).',
+
+  // Sites
+  'sites.tabSites': 'Sites',
+  'sites.tabClients': 'Clients',
+  'sites.new': 'New site',
+  'sites.url': 'Website URL',
+  'sites.adminUrl': 'Admin URL',
+  'sites.host': 'Hosting company',
+  'sites.price': 'Price ($)',
+  'sites.domainRenewal': 'Domain renewal',
+  'sites.hostingRenewal': 'Hosting renewal',
+  'sites.check': 'Check now',
+  'sites.up': 'Online',
+  'sites.down': 'Not answering',
+  'sites.unknown': 'Not checked',
+  'sites.noPasswords': 'Never store passwords here.',
+  'sites.checkNote': 'Tells if the site answers, not why it is broken.',
+  'clients.new': 'New client',
+
+  // Accounting
+  'acc.tabMoney': 'Money in / out',
+  'acc.tabInvoices': 'Invoices',
+  'acc.in': 'Money in',
+  'acc.out': 'Money out',
+  'acc.balance': 'Balance',
+  'acc.newIn': 'Add money in',
+  'acc.newOut': 'Add money out',
+  'acc.amount': 'Amount, taxes included ($)',
+  'acc.category': 'Category',
+  'acc.type': 'Type',
+  'acc.receipt': 'Receipt (photo or PDF)',
+  'acc.viewReceipt': 'Receipt',
+  'acc.gst': 'GST',
+  'acc.qst': 'QST',
+  'acc.taxesCollected': 'Taxes collected',
+  'acc.taxesPaid': 'Taxes paid',
+  'acc.taxesOff': 'Taxes are OFF (not registered). Turn them on in Profile.',
+  'inv.new': 'New invoice',
+  'inv.number': 'Invoice #',
+  'inv.issue': 'Issued',
+  'inv.due': 'Due',
+  'inv.items': 'Items',
+  'inv.item': 'Description',
+  'inv.qty': 'Qty',
+  'inv.price': 'Unit price',
+  'inv.addItem': '+ Add line',
+  'inv.subtotal': 'Subtotal',
+  'inv.total': 'Total',
+  'inv.unpaid': 'Unpaid',
+  'inv.paid': 'Paid',
+  'inv.markPaid': 'Mark paid',
+  'inv.pdf': 'PDF',
+  'inv.billTo': 'Bill to',
+  'inv.invoice': 'INVOICE',
+  'inv.thanks': 'Thank you!',
+  'inv.paidNote': 'Marked paid, and added to money in.',
+
+  // Profile
+  'prof.account': 'Account',
+  'prof.lastLogins': 'Recent logins',
+  'prof.business': 'Business details (printed on invoices)',
+  'prof.businessName': 'Business name',
+  'prof.address': 'Address',
+  'prof.taxes': 'Taxes',
+  'prof.taxesOn': 'Charge GST/QST (only once registered)',
+  'prof.gstNumber': 'GST number',
+  'prof.qstNumber': 'QST number',
+  'prof.gstRate': 'GST rate (%)',
+  'prof.qstRate': 'QST rate (%)',
+  'prof.backup': 'Backup',
+  'prof.backupText': 'Download all your MOSS data as one file. Do this once a month.',
+  'prof.export': 'Export everything',
+  'prof.logout': 'Log out',
+  'prof.language': 'Language',
+};
+
+const fr = {
+  'login.tagline': 'Ton centre de gestion, juste pour toi.',
+  'login.google': 'Se connecter avec Google',
+  'login.notOwner': "Ce compte n'a pas accès à MOSS.",
+  'offline.badge': 'Hors ligne — lecture seule',
+  'offline.noSave': "Tu es hors ligne. Il faut Internet pour enregistrer.",
+
+  'nav.dashboard': 'Tableau de bord',
+  'nav.sites': 'Apps et sites web',
+  'nav.appointments': 'Rendez-vous',
+  'nav.todos': 'À faire',
+  'nav.notes': 'Notes',
+  'nav.roadmap': 'Feuille de route',
+  'nav.accounting': 'Comptabilité',
+  'nav.profile': 'Profil',
+
+  'btn.add': 'Ajouter',
+  'btn.save': 'Enregistrer',
+  'btn.cancel': 'Annuler',
+  'btn.delete': 'Supprimer',
+  'btn.edit': 'Modifier',
+  'btn.close': 'Fermer',
+  'confirm.delete': 'Supprimer ceci? Impossible à annuler.',
+  'saved': 'Enregistré',
+  'deleted': 'Supprimé',
+  'error.generic': "Quelque chose n'a pas marché",
+  'empty': "Rien ici pour l'instant.",
+  'none': 'Aucun',
+  'search': 'Rechercher…',
+  'all': 'Tout',
+
+  'f.title': 'Titre',
+  'f.name': 'Nom',
+  'f.notes': 'Notes',
+  'f.description': 'Description',
+  'f.date': 'Date',
+  'f.dueDate': 'Échéance',
+  'f.client': 'Client',
+  'f.site': 'Site',
+  'f.email': 'Courriel',
+  'f.phone': 'Téléphone',
+  'f.status': 'Statut',
+  'f.repeat': 'Répéter',
+  'f.priority': 'Priorité',
+
+  'repeat.none': 'Ne se répète pas',
+  'repeat.weekly': 'Chaque semaine',
+  'repeat.monthly': 'Chaque mois',
+  'repeat.yearly': 'Chaque année',
+  'priority.low': 'Basse',
+  'priority.medium': 'Moyenne',
+  'priority.high': 'Haute',
+
+  'dash.appointments': 'À venir',
+  'dash.todos': 'Dû ou en retard',
+  'dash.money': 'Ce mois-ci',
+  'dash.renewals': 'Renouvellements (30 jours)',
+  'dash.unpaid': 'factures impayées',
+  'dash.allClear': 'Rien à signaler',
+  'dash.hello': 'Salut Suzy',
+
+  'todo.new': 'Nouvelle tâche',
+  'todo.showDone': 'Voir les terminées',
+  'todo.overdue': 'En retard',
+  'todo.nextOn': 'Fait! Prochaine le',
+
+  'notes.new': 'Nouvelle note',
+  'notes.untitled': 'Sans titre',
+  'notes.tags': 'Étiquettes (séparées par des virgules)',
+  'notes.pin': 'Épingler',
+  'notes.unpin': 'Désépingler',
+  'notes.pick': 'Choisis une note, ou crées-en une.',
+  'notes.back': '← Notes',
+
+  'road.new': 'Nouvel objectif',
+  'road.idea': 'Idée',
+  'road.doing': 'En cours',
+  'road.done': 'Terminé',
+
+  'appt.new': 'Nouveau rendez-vous',
+  'appt.start': 'Début',
+  'appt.end': 'Fin',
+  'appt.location': 'Lieu',
+  'appt.upcoming': 'À venir',
+  'appt.today': "Aujourd'hui",
+  'appt.sync': 'Synchroniser avec Google',
+  'appt.syncing': 'Synchronisation…',
+  'appt.synced': 'Synchronisé avec Google Agenda',
+  'appt.syncNeedsLogin': "Déconnecte-toi et reconnecte-toi avec Google pour autoriser l'Agenda.",
+  'appt.syncNotSetUp': "La synchro Google n'est pas encore configurée (voir README, phase 7).",
+
+  'sites.tabSites': 'Sites',
+  'sites.tabClients': 'Clients',
+  'sites.new': 'Nouveau site',
+  'sites.url': 'Adresse du site',
+  'sites.adminUrl': 'Adresse admin',
+  'sites.host': 'Hébergeur',
+  'sites.price': 'Prix ($)',
+  'sites.domainRenewal': 'Renouvellement du domaine',
+  'sites.hostingRenewal': "Renouvellement de l'hébergement",
+  'sites.check': 'Vérifier',
+  'sites.up': 'En ligne',
+  'sites.down': 'Ne répond pas',
+  'sites.unknown': 'Pas vérifié',
+  'sites.noPasswords': 'Ne jamais mettre de mots de passe ici.',
+  'sites.checkNote': 'Dit si le site répond, pas pourquoi il est brisé.',
+  'clients.new': 'Nouveau client',
+
+  'acc.tabMoney': 'Entrées / sorties',
+  'acc.tabInvoices': 'Factures',
+  'acc.in': 'Entrées',
+  'acc.out': 'Sorties',
+  'acc.balance': 'Solde',
+  'acc.newIn': 'Ajouter une entrée',
+  'acc.newOut': 'Ajouter une dépense',
+  'acc.amount': 'Montant, taxes incluses ($)',
+  'acc.category': 'Catégorie',
+  'acc.type': 'Type',
+  'acc.receipt': 'Reçu (photo ou PDF)',
+  'acc.viewReceipt': 'Reçu',
+  'acc.gst': 'TPS',
+  'acc.qst': 'TVQ',
+  'acc.taxesCollected': 'Taxes perçues',
+  'acc.taxesPaid': 'Taxes payées',
+  'acc.taxesOff': 'Taxes désactivées (non inscrite). Active-les dans Profil.',
+  'inv.new': 'Nouvelle facture',
+  'inv.number': 'Facture n°',
+  'inv.issue': 'Émise le',
+  'inv.due': 'Échéance',
+  'inv.items': 'Articles',
+  'inv.item': 'Description',
+  'inv.qty': 'Qté',
+  'inv.price': 'Prix unitaire',
+  'inv.addItem': '+ Ajouter une ligne',
+  'inv.subtotal': 'Sous-total',
+  'inv.total': 'Total',
+  'inv.unpaid': 'Impayée',
+  'inv.paid': 'Payée',
+  'inv.markPaid': 'Marquer payée',
+  'inv.pdf': 'PDF',
+  'inv.billTo': 'Facturé à',
+  'inv.invoice': 'FACTURE',
+  'inv.thanks': 'Merci!',
+  'inv.paidNote': 'Marquée payée, et ajoutée aux entrées.',
+
+  'prof.account': 'Compte',
+  'prof.lastLogins': 'Connexions récentes',
+  'prof.business': "Infos d'entreprise (sur les factures)",
+  'prof.businessName': "Nom de l'entreprise",
+  'prof.address': 'Adresse',
+  'prof.taxes': 'Taxes',
+  'prof.taxesOn': 'Charger TPS/TVQ (seulement une fois inscrite)',
+  'prof.gstNumber': 'Numéro de TPS',
+  'prof.qstNumber': 'Numéro de TVQ',
+  'prof.gstRate': 'Taux TPS (%)',
+  'prof.qstRate': 'Taux TVQ (%)',
+  'prof.backup': 'Sauvegarde',
+  'prof.backupText': 'Télécharge toutes tes données MOSS dans un fichier. Fais-le une fois par mois.',
+  'prof.export': 'Tout exporter',
+  'prof.logout': 'Se déconnecter',
+  'prof.language': 'Langue',
+};
+
+const dicts = { en, fr };
+
+function loadLang() {
+  try { return localStorage.getItem('moss_lang') === 'fr' ? 'fr' : 'en'; }
+  catch { return 'en'; }
+}
+
+let current = loadLang();
+
+export function lang() { return current; }
+
+export function setLang(code) {
+  current = code === 'fr' ? 'fr' : 'en';
+  try { localStorage.setItem('moss_lang', current); } catch { /* private mode */ }
+  document.documentElement.lang = current;
+  applyStatic();
+}
+
+// t('key') → the label in the current language (falls back to English, then the key)
+export function t(key) {
+  return dicts[current][key] ?? en[key] ?? key;
+}
+
+// Fill every element that has data-t="key"
+export function applyStatic(root = document) {
+  root.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
+  root.querySelectorAll('.lang-switch').forEach(el => {
+    el.textContent = current === 'en' ? 'Français' : 'English';
+  });
+}

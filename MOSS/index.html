@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f0b09">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' 'unsafe-inline';
+                 img-src 'self' data: blob: https:;
+                 connect-src 'self' https: wss://*.supabase.co;
+                 frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>MOSS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/quill.snow.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Shown while we check if you're logged in -->
+  <div id="boot" class="boot">MOSS</div>
+
+  <!-- Login screen -->
+  <main id="login" class="login" hidden>
+    <div class="login-card">
+      <div class="brand-big">MOSS</div>
+      <p class="muted" data-t="login.tagline"></p>
+      <button id="login-google" class="btn btn-gold btn-lg" data-t="login.google"></button>
+      <p id="login-error" class="error" hidden></p>
+      <button class="lang-switch btn btn-ghost btn-sm" type="button"></button>
+    </div>
+  </main>
+
+  <!-- The app -->
+  <div id="app" class="app" hidden>
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">MOSS</div>
+      <nav id="nav"></nav>
+      <div class="sidebar-foot">
+        <button class="lang-switch btn btn-ghost btn-sm" type="button"></button>
+      </div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <button id="menu-btn" class="icon-btn" aria-label="Menu">☰</button>
+        <h1 id="page-title"></h1>
+        <span id="offline-badge" class="badge badge-warn" data-t="offline.badge" hidden></span>
+      </header>
+      <section id="view" class="view"></section>
+    </div>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Libraries (kept in /vendor so the app works offline) -->
+  <script src="vendor/supabase.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="vendor/quill.js"></script>
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <!-- MOSS -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

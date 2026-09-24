@@ -1,0 +1,13 @@
+{
+  "name": "MOSS",
+  "short_name": "MOSS",
+  "description": "Suzy's one-person operations hub",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f0b09",
+  "theme_color": "#0f0b09",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
