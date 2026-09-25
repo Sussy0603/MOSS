@@ -24,14 +24,25 @@ async function call(body) {
   return data;
 }
 
-// Called right after a Google login
+// Called right after a Google login. Throws if the key couldn't be saved.
 export async function storeGoogleToken(refreshToken) {
-  try { await call({ action: 'store_token', refresh_token: refreshToken }); }
-  catch (err) { console.info('Google token not stored (sync not set up yet?)', err.message); }
+  await call({ action: 'store_token', refresh_token: refreshToken });
 }
 
 // Two-way sync. Returns { pushed, pulled, removed }
-export function syncNow() { return call({ action: 'sync' }); }
+// If the server has no calendar key yet, try the one saved in this browser once.
+export async function syncNow() {
+  try {
+    return await call({ action: 'sync' });
+  } catch (err) {
+    if (err.message !== t('appt.syncNeedsLogin')) throw err;
+    const { data } = await sb.auth.getSession();
+    const key = data.session?.provider_refresh_token;
+    if (!key) throw err;
+    await storeGoogleToken(key);
+    return call({ action: 'sync' });
+  }
+}
 
 // Called before deleting an appointment that came from / went to Google
 export async function deleteGoogleEvent(eventId) {

@@ -5,11 +5,9 @@
 // by the Row Level Security rules in supabase/schema.sql.
 // ============================================================
 
-export const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
-export const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
-
-// The only Google account allowed in (same as in schema.sql).
-export const OWNER_EMAIL = 'YOUR_EMAIL@gmail.com';
+export const SUPABASE_URL = 'https://nlqxfmiqfwtbezjueved.supabase.co';
+export const SUPABASE_ANON_KEY = 'sb_publishable_aO1jP2v07CQlVD2pVh6e0A_Ln6hr-pM';
+export const OWNER_EMAIL = 'suzy413612@gmail.com';
 
 // Ask Google for Calendar access at login (needed for phase 7 sync).
 // Set to false if you haven't set up Calendar sync yet.

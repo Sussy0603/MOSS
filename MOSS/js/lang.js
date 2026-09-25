@@ -99,6 +99,8 @@ const en = {
   'appt.synced': 'Synced with Google Calendar',
   'appt.syncNeedsLogin': 'Log out and back in with Google to allow Calendar access.',
   'appt.syncNotSetUp': 'Google sync is not set up yet (see README, phase 7).',
+  'appt.calendarConnected': 'Google Calendar connected',
+  'appt.calendarNotConnected': 'Google Calendar not connected',
 
   // Sites
   'sites.tabSites': 'Sites',
@@ -172,6 +174,8 @@ const en = {
   'prof.backupText': 'Download all your MOSS data as one file. Do this once a month.',
   'prof.export': 'Export everything',
   'prof.logout': 'Log out',
+  'prof.calUnknown': 'Not connected yet.',
+  'prof.calConnect': 'Connect Google Calendar',
   'prof.language': 'Language',
 };
 
@@ -265,6 +269,8 @@ const fr = {
   'appt.synced': 'Synchronisé avec Google Agenda',
   'appt.syncNeedsLogin': "Déconnecte-toi et reconnecte-toi avec Google pour autoriser l'Agenda.",
   'appt.syncNotSetUp': "La synchro Google n'est pas encore configurée (voir README, phase 7).",
+  'appt.calendarConnected': 'Google Agenda connecté',
+  'appt.calendarNotConnected': 'Google Agenda non connecté',
 
   'sites.tabSites': 'Sites',
   'sites.tabClients': 'Clients',
@@ -335,6 +341,8 @@ const fr = {
   'prof.backupText': 'Télécharge toutes tes données MOSS dans un fichier. Fais-le une fois par mois.',
   'prof.export': 'Tout exporter',
   'prof.logout': 'Se déconnecter',
+  'prof.calUnknown': 'Pas encore connecté.',
+  'prof.calConnect': 'Connecter Google Agenda',
   'prof.language': 'Langue',
 };
 

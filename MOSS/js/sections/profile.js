@@ -6,7 +6,9 @@
 import { getSettings, saveSettings, exportAll } from '../db.js';
 import { t, lang, setLang } from '../lang.js';
 import { esc, fmtDateTime, isoDate, downloadFile, toast, toastError } from '../ui.js';
-import { logout } from '../app.js';
+import { logout, loginWithGoogle, calendarStatus } from '../app.js';
+
+const VERSION = 'MOSS 1.1';
 
 export default {
   id: 'profile',
@@ -15,6 +17,10 @@ export default {
     const u = ctx.user;
     const meta = u.user_metadata || {};
     const logins = s.recent_logins || [];
+    const cal = calendarStatus();
+    const calText = !cal ? t('prof.calUnknown')
+      : cal.ok ? `✓ ${t('appt.calendarConnected')} · ${fmtDateTime(cal.at)}`
+      : `✕ ${t('appt.calendarNotConnected')} — ${cal.detail}`;
 
     view.innerHTML = `
       <div class="profile">
@@ -59,10 +65,17 @@ export default {
         </section>
 
         <section class="card">
+          <h2>Google Calendar</h2>
+          <p class="${cal && !cal.ok ? 'text-danger' : 'muted'}">${esc(calText)}</p>
+          <button class="btn btn-ghost" data-cal>${esc(t('prof.calConnect'))}</button>
+        </section>
+
+        <section class="card">
           <h2>${esc(t('prof.backup'))}</h2>
           <p class="muted">${esc(t('prof.backupText'))}</p>
           <button class="btn btn-gold" data-export>${esc(t('prof.export'))}</button>
         </section>
+        <p class="muted small">${VERSION}</p>
       </div>`;
 
     const form = view.querySelector('[data-biz]');
@@ -90,6 +103,7 @@ export default {
       ctx.rerender();
     };
     view.querySelector('[data-logout]').onclick = logout;
+    view.querySelector('[data-cal]').onclick = () => loginWithGoogle();
     view.querySelector('[data-export]').onclick = async e => {
       e.target.disabled = true;
       try {

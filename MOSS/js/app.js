@@ -8,7 +8,7 @@
 import { sb, isOffline, onOfflineChange, clearCache, getSettings, saveSettings, forgetSettings } from './db.js';
 import { OWNER_EMAIL, GOOGLE_CALENDAR_SYNC } from './config.js';
 import { t, setLang, lang, applyStatic } from './lang.js';
-import { esc, toastError } from './ui.js';
+import { esc, toast, toastError } from './ui.js';
 import { storeGoogleToken } from './sync.js';
 
 import dashboard from './sections/dashboard.js';
@@ -71,7 +71,7 @@ async function route() {
 }
 
 // ---------- login ----------
-async function loginWithGoogle() {
+export async function loginWithGoogle() {
   const options = { redirectTo: location.origin + location.pathname };
   if (GOOGLE_CALENDAR_SYNC) {
     options.scopes = 'https://www.googleapis.com/auth/calendar.events';
@@ -106,15 +106,44 @@ async function onSignedIn(session) {
       await saveSettings({ recent_logins: logins });
       if (s.language && s.language !== lang()) setLang(s.language);
     } catch (err) { console.warn('Could not log login', err); }
-    if (session.provider_refresh_token) storeGoogleToken(session.provider_refresh_token);
-    // Clean the ?code=… out of the address bar
-    history.replaceState(null, '', location.pathname + location.hash);
+    // Clean the ?code=… or #access_token=… out of the address bar
+    const keepHash = location.hash.startsWith('#/') ? location.hash : '';
+    history.replaceState(null, '', location.pathname + keepHash);
   }
 
+  // Hand the Google calendar key to the server (once per key)
+  if (GOOGLE_CALENDAR_SYNC) connectCalendar(session);
   if (firstTime) {
     buildNav();
     show('app');
     route();
+  }
+}
+
+// Result is kept so Profile can show it (a toast is easy to miss during login)
+export function calendarStatus() {
+  try { return JSON.parse(localStorage.getItem('moss_cal_status')) || null; } catch { return null; }
+}
+function setCalendarStatus(ok, detail = '') {
+  try { localStorage.setItem('moss_cal_status', JSON.stringify({ ok, detail, at: new Date().toISOString() })); } catch { /* ignore */ }
+}
+async function connectCalendar(session) {
+  const key = session.provider_refresh_token;
+  if (!key) {
+    if (session.provider_token) setCalendarStatus(false, 'Google sent no calendar key');
+    return;
+  }
+  let sent = '';
+  try { sent = sessionStorage.getItem('moss_cal_sent') || ''; } catch { /* ignore */ }
+  if (sent === key) return;
+  try {
+    await storeGoogleToken(key);
+    try { sessionStorage.setItem('moss_cal_sent', key); } catch { /* ignore */ }
+    setCalendarStatus(true);
+    toast(t('appt.calendarConnected'));
+  } catch (err) {
+    setCalendarStatus(false, err.message);
+    toast(`${t('appt.calendarNotConnected')} (${err.message})`, 'err');
   }
 }
 
