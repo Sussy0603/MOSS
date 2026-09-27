@@ -7,6 +7,7 @@
 const en = {
   'login.tagline': 'Your one-person operations hub.',
   'login.google': 'Sign in with Google',
+  'login.remember': 'Remember me',
   'login.notOwner': 'This account is not allowed in MOSS.',
   'offline.badge': 'Offline — view only',
   'offline.noSave': "You're offline. Saving needs internet.",
@@ -182,6 +183,7 @@ const en = {
 const fr = {
   'login.tagline': 'Ton centre de gestion, juste pour toi.',
   'login.google': 'Se connecter avec Google',
+  'login.remember': 'Se souvenir de moi',
   'login.notOwner': "Ce compte n'a pas accès à MOSS.",
   'offline.badge': 'Hors ligne — lecture seule',
   'offline.noSave': "Tu es hors ligne. Il faut Internet pour enregistrer.",

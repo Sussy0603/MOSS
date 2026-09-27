@@ -5,7 +5,7 @@
 // 3. Shows the section that matches the URL (#/todos, #/notes…)
 // ============================================================
 
-import { sb, isOffline, onOfflineChange, clearCache, getSettings, saveSettings, forgetSettings } from './db.js';
+import { sb, isOffline, onOfflineChange, clearCache, getSettings, saveSettings, forgetSettings, getRemember, setRemember } from './db.js';
 import { OWNER_EMAIL, GOOGLE_CALENDAR_SYNC } from './config.js';
 import { t, setLang, lang, applyStatic } from './lang.js';
 import { esc, toast, toastError } from './ui.js';
@@ -166,7 +166,8 @@ export async function logout() {
 // ---------- start ----------
 function wireStatic() {
   applyStatic();
-  $('login-google').onclick = loginWithGoogle;
+  $('login-remember').checked = getRemember();
+  $('login-google').onclick = () => { setRemember($('login-remember').checked); loginWithGoogle(); };
   document.querySelectorAll('.lang-switch').forEach(b => {
     b.onclick = async () => {
       setLang(lang() === 'en' ? 'fr' : 'en');

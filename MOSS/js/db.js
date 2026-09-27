@@ -8,8 +8,23 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 import { t } from './lang.js';
 
+// "Remember me": on → session kept in localStorage (stays signed in),
+// off → sessionStorage (signed out when the browser closes).
+const REMEMBER = 'moss_remember';
+export const getRemember = () => { try { return localStorage.getItem(REMEMBER) !== '0'; } catch { return true; } };
+export function setRemember(on) {
+  try { localStorage.setItem(REMEMBER, on ? '1' : '0'); } catch {}
+}
+const authStore = () => (getRemember() ? localStorage : sessionStorage);
+const other = () => (getRemember() ? sessionStorage : localStorage);
+const authStorage = {
+  getItem: k => { try { return authStore().getItem(k) ?? other().getItem(k); } catch { return null; } },
+  setItem: (k, v) => { try { authStore().setItem(k, v); other().removeItem(k); } catch {} },
+  removeItem: k => { try { localStorage.removeItem(k); sessionStorage.removeItem(k); } catch {} },
+};
+
 export const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storage: authStorage },
 });
 
 const CACHE = 'moss_cache_';

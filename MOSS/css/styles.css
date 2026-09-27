@@ -135,6 +135,7 @@ h3 { font-size: .95rem; margin: 18px 0 8px; color: var(--muted); font-weight: 60
 .search { width: 100%; margin-bottom: 10px; }
 .check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
 .check input { width: 18px; height: 18px; accent-color: var(--gold); }
+.login-remember { justify-content: center; color: var(--muted); font-size: .9rem; }
 
 /* ---------- lists of rows ---------- */
 .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
@@ -196,6 +197,20 @@ input[type=file] { padding: 7px; }
 .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; display: grid; }
 .stat strong { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
 .month-label { text-transform: capitalize; min-width: 130px; text-align: center; }
+.month-pick { position: relative; }
+button.month-label { font: inherit; font-weight: 700; color: var(--text); background: transparent; border: 1px solid transparent;
+  border-radius: var(--radius-sm); min-height: 36px; padding: 0 10px; cursor: pointer; }
+button.month-label:hover, button.month-label[aria-expanded="true"] { border-color: var(--line); background: var(--card); }
+.month-label .caret { color: var(--muted); font-size: .75rem; margin-left: 2px; }
+.month-pop { position: absolute; top: calc(100% + 6px); right: 50%; transform: translateX(50%); z-index: 30; width: 240px;
+  background: var(--card-2); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px; }
+.month-pop[hidden] { display: none; }
+.month-pop-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.month-cell { font: inherit; font-size: .88rem; text-transform: capitalize; color: var(--text); background: var(--card);
+  border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 8px 0; cursor: pointer; }
+.month-cell:hover { border-color: var(--gold); }
+.month-cell.on { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 700; }
 .items { display: grid; gap: 8px; margin-bottom: 8px; }
 .item-row { display: grid; grid-template-columns: 1fr 70px 110px 36px; gap: 6px; }
 .totals { width: 100%; display: grid; gap: 4px; border-top: 1px solid var(--line); padding-top: 10px; }
