@@ -4,7 +4,7 @@
 // Changed any file? Bump VERSION so browsers get the new one.
 // ============================================================
 
-const VERSION = 'moss-v1';
+const VERSION = 'moss-v2';
 const ASSETS = [
   './', 'index.html', 'manifest.json', 'icon.svg',
   'css/styles.css',
