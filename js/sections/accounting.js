@@ -13,6 +13,7 @@ import { invoicePdf } from '../pdf.js';
 
 let tab = 'money';
 let monthKey = isoDate().slice(0, 7); // 'YYYY-MM'
+let allTime = false; // true = show every transaction ever, not one month
 
 // ---------- taxes ----------
 export function taxesFor(subtotal, settings) {
@@ -78,7 +79,7 @@ function openTransaction(tx, settings, ctx, type = 'out') {
 }
 
 function renderMoney(body, txs, settings, ctx) {
-  const inMonth = txs.filter(x => x.date.startsWith(monthKey)).sort((a, b) => (a.date < b.date ? 1 : -1));
+  const inMonth = txs.filter(x => allTime || x.date.startsWith(monthKey)).sort((a, b) => (a.date < b.date ? 1 : -1));
   const sum = (type, key = 'amount') => round2(inMonth.filter(x => x.type === type).reduce((s, x) => s + Number(x[key] || 0), 0));
   const totalIn = sum('in'), totalOut = sum('out');
   const [y, m] = monthKey.split('-').map(Number);
@@ -89,12 +90,11 @@ function renderMoney(body, txs, settings, ctx) {
       <button class="btn btn-gold" data-new="in">+ ${esc(t('acc.newIn'))}</button>
       <button class="btn btn-ghost" data-new="out">+ ${esc(t('acc.newOut'))}</button>
       <span class="spacer"></span>
+      ${allTime ? `<strong class="month-label">${esc(t('acc.allTime'))}</strong>` : `
       <button class="icon-btn" data-prev aria-label="Previous month">‹</button>
-      <div class="month-pick">
-        <button class="month-label" data-pick aria-haspopup="true" aria-expanded="false">${esc(monthLabel)} <span class="caret">▾</span></button>
-        <div class="month-pop" data-pop hidden></div>
-      </div>
-      <button class="icon-btn" data-next aria-label="Next month">›</button>
+      <strong class="month-label">${esc(monthLabel)}</strong>
+      <button class="icon-btn" data-next aria-label="Next month">›</button>`}
+      <button class="btn btn-ghost btn-sm ${allTime ? 'on' : ''}" data-alltime aria-pressed="${allTime}">${esc(t(allTime ? 'acc.byMonth' : 'acc.allTime'))}</button>
     </div>
     <div class="stats">
       <div class="stat"><span class="muted">${esc(t('acc.in'))}</span><strong class="text-good">${esc(fmtMoney(totalIn))}</strong></div>
@@ -117,42 +117,11 @@ function renderMoney(body, txs, settings, ctx) {
 
   body.querySelectorAll('[data-new]').forEach(b => { b.onclick = () => openTransaction(null, settings, ctx, b.dataset.new); });
   const shift = k => { const d = new Date(y, m - 1 + k, 1); monthKey = isoDate(d).slice(0, 7); ctx.rerender(); };
-  body.querySelector('[data-prev]').onclick = () => shift(-1);
-  body.querySelector('[data-next]').onclick = () => shift(1);
-
-  // Month picker: click the label → year switcher + 12-month grid
-  const pickBtn = body.querySelector('[data-pick]');
-  const pop = body.querySelector('[data-pop]');
-  const locale = lang() === 'fr' ? 'fr-CA' : 'en-CA';
-  let popYear = y;
-  const drawPop = () => {
-    pop.innerHTML = `
-      <div class="month-pop-head">
-        <button class="icon-btn" data-py="-1" aria-label="Previous year">‹</button>
-        <strong>${popYear}</strong>
-        <button class="icon-btn" data-py="1" aria-label="Next year">›</button>
-      </div>
-      <div class="month-grid">${Array.from({ length: 12 }, (_, i) => `
-        <button class="month-cell${popYear === y && i === m - 1 ? ' on' : ''}" data-mi="${i}">${esc(new Date(popYear, i, 1).toLocaleDateString(locale, { month: 'short' }))}</button>`).join('')}
-      </div>`;
-    pop.querySelectorAll('[data-py]').forEach(b => { b.onclick = e => { e.stopPropagation(); popYear += Number(b.dataset.py); drawPop(); }; });
-    pop.querySelectorAll('[data-mi]').forEach(b => { b.onclick = () => {
-      monthKey = `${popYear}-${String(Number(b.dataset.mi) + 1).padStart(2, '0')}`;
-      closePop(); ctx.rerender();
-    }; });
-  };
-  const onOutside = e => { if (!pop.contains(e.target) && e.target !== pickBtn && !pickBtn.contains(e.target)) closePop(); };
-  const onKey = e => { if (e.key === 'Escape') { closePop(); pickBtn.focus(); } };
-  function closePop() {
-    pop.hidden = true; pickBtn.setAttribute('aria-expanded', 'false');
-    document.removeEventListener('click', onOutside); document.removeEventListener('keydown', onKey);
+  if (!allTime) {
+    body.querySelector('[data-prev]').onclick = () => shift(-1);
+    body.querySelector('[data-next]').onclick = () => shift(1);
   }
-  pickBtn.onclick = () => {
-    if (!pop.hidden) return closePop();
-    popYear = y; drawPop();
-    pop.hidden = false; pickBtn.setAttribute('aria-expanded', 'true');
-    setTimeout(() => { document.addEventListener('click', onOutside); document.addEventListener('keydown', onKey); });
-  };
+  body.querySelector('[data-alltime]').onclick = () => { allTime = !allTime; ctx.rerender(); };
   body.querySelectorAll('.row').forEach(li => {
     const tx = txs.find(x => x.id === li.dataset.id);
     li.querySelector('[data-edit]').onclick = () => openTransaction(tx, settings, ctx, tx.type);

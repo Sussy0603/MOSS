@@ -8,7 +8,7 @@ import { t, lang, setLang } from '../lang.js';
 import { esc, fmtDateTime, isoDate, downloadFile, toast, toastError } from '../ui.js';
 import { logout, loginWithGoogle, calendarStatus } from '../app.js';
 
-const VERSION = 'MOSS 1.1';
+const VERSION = 'MOSS 1.2';
 
 export default {
   id: 'profile',
